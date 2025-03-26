@@ -11,4 +11,9 @@ public class WishListService {
     }
 
 
+    public getAllWishList() {
+        wishlistRepository.
+    }
+
+
 }
