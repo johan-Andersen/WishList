@@ -1,0 +1,220 @@
+/* Generel styling */
+.header {
+    display: flex;
+    align-items: center;
+    gap: 24px; /* Mellemrum mellem elementer */
+    padding: 32px;
+    position: relative;
+}
+
+.block {
+    display: inline-flex;
+    align-items: center;
+    gap: 24px;
+    flex: 0 0 auto;
+}
+
+.figma {
+    width: 40px;
+    margin-top: -1.75px;
+    margin-bottom: -1.75px;
+}
+
+.header-auth {
+    display: flex;
+    gap: 16px; /* Mellemrum mellem knapperne */
+    position: absolute;
+    top: 34px;
+    right: 50px; /* Placering af knapper */
+}
+
+.signIn, .register {
+    all: unset;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px;
+    border-radius: 8px;
+    flex-grow: 1;
+    border: 1px solid #ccc; /* Border farve */
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    text-align: center;
+    white-space: nowrap;
+    transition: background-color 0.3s ease; /* For glidende overgang på baggrundsfarve */
+    cursor: pointer;
+}
+
+.signIn {
+    background-color: #000000; /* Sort baggrund */
+    color: #ffffff; /* Hvid tekst */
+}
+
+.signIn:hover {
+    background-color: #007bff; /* Blå baggrund ved hover */
+}
+
+.register {
+    background-color: #444444; /* Mørk baggrund */
+    color: #ffffff; /* Hvid tekst */
+}
+
+.register:hover {
+    background-color: #007bff; /* Blå baggrund ved hover */
+}
+
+.brandName {
+    font-family: "Inter-Regular", Helvetica, serif;
+    font-weight: 400;
+    color: #000000;
+    font-size: 36px;
+    letter-spacing: 0;
+    line-height: 36px;
+    position: absolute;
+    top: 29px;
+    left: 96px;
+}
+
+/* Hero Image Section */
+.hero-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    background-color: #f0f0f0; /* Lys baggrund for hero image */
+    border-radius: 8px;
+}
+
+.overlap-group {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.text-content-title {
+    margin-bottom: 24px; /* Mellemrum mellem titel og knap */
+}
+
+.title {
+    font-family: "Inter", sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    color: #333333; /* Mørk tekstfarve */
+    line-height: 44px;
+}
+
+.createButton {
+    all: unset;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 24px;
+    background-color: #000000; /* Sort baggrund */
+    border-radius: 8px;
+    border: 1px solid #ccc; /* Border farve */
+    color: white;
+    transition: background-color 0.3s ease; /* For glidende overgang på baggrundsfarve */
+}
+
+.div {
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: #ffffff; /* Hvid tekst */
+    text-align: center;
+}
+
+.createButton:hover {
+    background-color: #007bff; /* Blå baggrund ved hover */
+}
+
+/* Panel Image Double */
+.panel-image-double {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px; /* Mellemrum mellem hero image og panel */
+    gap: 16px; /* Mellemrum mellem billederne */
+}
+
+.image {
+    flex: 1;
+    border-radius: 8px;
+    overflow: hidden; /* Skjul eventuelle overskydende kanter */
+}
+
+.img, .image-2 {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Sikre at billederne dækker hele containeren */
+}
+
+/* Modal (Popup) styling */
+.modal-toggle {
+    display: none; /* Skjul checkboxen */
+}
+
+.popup-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Sort baggrund */
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    max-width: 90%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.popup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.popup-form input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.popup-form button {
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.popup-form button:hover {
+    background-color: #0056b3;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: #000;
+    cursor: pointer;
+}
+
+/* Vis modal vinduet når checkboxen er checked */
+.modal-toggle:checked + .popup-modal {
+    display: flex;
+}
