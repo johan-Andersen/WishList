@@ -1,4 +1,4 @@
-package Repository;
+package org.example.wishlist.Repository;
 
 import org.springframework.stereotype.Repository;
 

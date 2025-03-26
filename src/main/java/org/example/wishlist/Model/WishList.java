@@ -1,4 +1,4 @@
-package Model;
+package org.example.wishlist.Model;
 
 public class WishList {
 

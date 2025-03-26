@@ -1,6 +1,6 @@
-package WishlistService;
+package org.example.wishlist.WishlistService;
 
-import Repository.WishlistRepository;
+import org.example.wishlist.Repository.WishlistRepository;
 
 public class WishListService {
 
