@@ -1,8 +1,7 @@
 package org.example.wishlist.Controller;
 
 import org.example.wishlist.Model.WishLists;
-import org.example.wishlist.Repository.WishlistRepository;
-import org.example.wishlist.WishlistService.WishListService;
+import org.example.wishlist.Service.WishListService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

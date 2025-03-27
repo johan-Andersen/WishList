@@ -1,4 +1,4 @@
-package org.example.wishlist.WishlistService;
+package org.example.wishlist.Service;
 
 import org.example.wishlist.Repository.WishlistRepository;
 import org.springframework.stereotype.Service;
