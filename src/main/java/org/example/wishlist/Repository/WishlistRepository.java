@@ -1,9 +1,13 @@
 package org.example.wishlist.Repository;
 
+import org.example.wishlist.Model.User;
 import org.example.wishlist.Model.WishLists;
+import org.example.wishlist.Model.Wishes;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import org.springframework.jdbc.core.JdbcTemplate;
+
+import java.util.List;
 
 
 @Repository
@@ -26,15 +30,35 @@ public class WishlistRepository {
 
     // Create
 
-    public void addWishList(WishLists wishLists) {
 
-        String sql = "INSERT INTO WishList(userID, name) VALUES(?,?)";
-        jdbcTemplate.update(sql, wishLists.)
-
+    public void addUser(User user) {
+        String sql = "INSERT INTO Users (username, email) VALUES (?,?)";
+        jdbcTemplate.update(sql, user.getUsername(), user.getEmail());
     }
 
 
 
+
+//    public void addWishList(WishLists wishLists) {
+//
+//        String sql = "INSERT INTO WishList(userID, name) VALUES(?,?)";
+//        jdbcTemplate.update(sql, wishLists.)
+//
+//    }
+
+    // Read
+
+//    // Retrieve all the wishes from the SQL database.
+//    public List<WishLists> getWishLists() {
+//        String sql = "SELECT * FROM wishlists";
+//        return jdbcTemplate.query(sql, (rs, rowNum) -> new WishLists(
+//                rs.getInt("id"),
+//                rs.getInt("user_id"),
+//                rs.getString("title"),
+//                rs.getString("description")));
+//
+//
+//    }
 
     // Example method to test the connection
 

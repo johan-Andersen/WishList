@@ -1,57 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8"/>
-    <link rel="stylesheet" href="/static/styles.css"/>
+    <meta charset="UTF-8">
+    <title>Wishlist App</title>
 </head>
 <body>
-<header class="header">
-    <header class="block"><img class="figma" src="/static/img.png"/></header>
-    <header class="header-auth">
-        <!-- Label knap til Sign In (åbner modal) -->
-        <label for="showModal" class="signIn">Sign in</label>
-        <!-- Label knap til Register (åbner modal) -->
-        <label for="showModal" class="register">Register</label>
-    </header>
-    <strong class="brandName">WishChain</strong>
-</header>
-
-<div class="hero-image">
-    <div class="overlap-group">
-        <div class="text-content-title">
-            <div class="title">Make a wish list</div>
-        </div>
-        <button class="createButton">Create</button>
-    </div>
-</div>
-
-<div class="panel-image-double">
-    <div class="image"><img class="img" src="/static/img_1.png"/></div>
-    <div class="image"><img class="image-2" src="/static/img_2.png"/></div>
-</div>
-
-<!-- Modal toggle checkbox -->
-<input type="checkbox" id="showModal" class="modal-toggle" />
-
-<!-- Popup Modal -->
-<div class="popup-modal">
-    <div class="popup-content">
-        <label for="showModal" class="close-button">&times;</label>
-        <form class="popup-form">
-            <h2>Sign In or Register</h2>
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" placeholder="Enter your name" required>
-
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email" required>
-
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password" required>
-
-            <button type="submit">Submit</button>
-        </form>
-    </div>
-</div>
-
+<h1>Welcome to the Wishlist App</h1>
+<a th:href="@{/wishlist/login}">Login</a> <!-- Link to login page -->
+<a th:href="@{/wishlist/signup}">Sign Up</a> <!-- Link to signup page -->
 </body>
 </html>

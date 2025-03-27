@@ -9,7 +9,8 @@ public class User {
     public User(String username, String email) {
         this.username = username;
         this.email = email;
-
+    }
+    public User() {
     }
 
     public int getUserID() {
