@@ -35,16 +35,28 @@ public class WishListController {
         return "profilepage";
     }
 
+//    @GetMapping("/profilepage")
+//    public String addWishList(Model model) {
+//        model.addAttribute("wishList", new WishLists());
+//        return "profilepage";
+//    }
     @GetMapping("/profilepage")
-    public String addWishList(Model model) {
-        model.addAttribute("wishList", new WishLists());
+    public String getProfilePage() {
         return "profilepage";
     }
-    @PostMapping("/profilepage")
+
+    @GetMapping("/addwishlist")
+    public String addWishList(Model model) {
+        model.addAttribute("wishList", new WishLists());
+        return "addwishlist";
+    }
+
+    @PostMapping("/addwishlist")
     public String addWishList(@ModelAttribute WishLists wishLists) {
         wishListService.addWishList(wishLists);
         return "profilepage";
     }
+
 
 
 

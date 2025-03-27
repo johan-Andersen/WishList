@@ -12,7 +12,7 @@
 <!-- Top NAVBAR -->
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" th:href="@{/profilepage}">WishChain</a>
+        <a type="button" class="navbar-brand" href="/wishlist/profilepage">WishChain</a>
         <ul class="navbar-nav">
             <li>
                 <a type="button" class="btn btn-light" th:href="@{/}">Log out</a>
@@ -23,12 +23,11 @@
 <!-- top NAVBAR (END) -->
 
 <!-- Username + ADD button -->
-<main>
     <section class="py-1 text-start container">
         <div class="row py-1">
             <div class="col-lg-6 col-md-8">
                 <h1 class="fw-light">Username</h1>
-                <a href="#" class="btn btn-primary my-2">+ Add wishlist</a>
+                <a type="button" class="btn btn-primary my-2" href="/wishlist/addwishlist" >+ Add wishlist</a>
             </div>
         </div>
     </section>
@@ -57,9 +56,8 @@
                     </div>
                 </div>
             </div>
-
-
-</main>
+        </div>
+    </div>
 <!-- Billede med tekst (END) -->
 
 <!-- Footer -->
