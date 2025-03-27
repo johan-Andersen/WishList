@@ -33,11 +33,8 @@ public class WishListController {
     @PostMapping("/signup")
     public String addUser(@ModelAttribute User user) {
         wishListService.addUser(user);
-        return "redirect:/wishlist/index";
+        return "profilepage";
     }
-
-
-
 
 
 
