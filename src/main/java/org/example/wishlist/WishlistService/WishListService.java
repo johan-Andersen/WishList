@@ -1,7 +1,9 @@
 package org.example.wishlist.WishlistService;
 
 import org.example.wishlist.Repository.WishlistRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class WishListService {
 
     private final WishlistRepository wishlistRepository;

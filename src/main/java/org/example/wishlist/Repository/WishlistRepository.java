@@ -15,11 +15,13 @@ public class WishlistRepository {
     @Value("${DEV_PASSWORD}")
     private String password;
 
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     public WishlistRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
+
+    // Example method to test the connection
 
 
 
