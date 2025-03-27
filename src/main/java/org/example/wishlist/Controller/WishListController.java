@@ -29,10 +29,20 @@ public class WishListController {
         model.addAttribute("user", new User());
         return "signup";
     }
-
     @PostMapping("/signup")
     public String addUser(@ModelAttribute User user) {
         wishListService.addUser(user);
+        return "profilepage";
+    }
+
+    @GetMapping("/profilepage")
+    public String addWishList(Model model) {
+        model.addAttribute("wishList", new WishLists());
+        return "profilepage";
+    }
+    @PostMapping("/profilepage")
+    public String addWishList(@ModelAttribute WishLists wishLists) {
+        wishListService.addWishList(wishLists);
         return "profilepage";
     }
 

@@ -12,6 +12,9 @@ public class WishLists {
         this.userID = userID;
         this.name = name;
     }
+    public WishLists() {
+
+    }
 
     public String getUserID() {
         return userID;
