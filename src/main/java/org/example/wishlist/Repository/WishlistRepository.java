@@ -1,5 +1,6 @@
 package org.example.wishlist.Repository;
 
+import org.example.wishlist.Model.WishLists;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -21,10 +22,21 @@ public class WishlistRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    // C (create) R (read) U (update) D (delete)
+
+    // Create
+
+    public void addWishList(WishLists wishLists) {
+
+        String sql = "INSERT INTO WishList(userID, name) VALUES(?,?)";
+        jdbcTemplate.update(sql, wishLists.)
+
+    }
+
+
+
+
     // Example method to test the connection
-
-
-
 
 
 }

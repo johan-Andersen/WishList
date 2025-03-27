@@ -20,13 +20,13 @@ public class WishListController {
     }
 
 
-    @GetMapping("")
-    public String getAllWishList(Model model) {
-
-        List<WishLists> allWishLists = wishListService.
-
-        model.addAttribute("wishlists", )
-    }
+//    @GetMapping("")
+//    public String getAllWishList(Model model) {
+//
+//        List<WishLists> allWishLists = wishListService.
+//
+//        model.addAttribute("wishlists", )
+//    }
 
 
 
