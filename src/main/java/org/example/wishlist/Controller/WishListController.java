@@ -35,11 +35,6 @@ public class WishListController {
         return "profilepage";
     }
 
-//    @GetMapping("/profilepage")
-//    public String addWishList(Model model) {
-//        model.addAttribute("wishList", new WishLists());
-//        return "profilepage";
-//    }
     @GetMapping("/profilepage")
     public String getProfilePage() {
         return "profilepage";

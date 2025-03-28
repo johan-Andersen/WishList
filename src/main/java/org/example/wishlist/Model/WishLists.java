@@ -4,11 +4,11 @@ import java.util.List;
 
 public class WishLists {
 
-    private String wishlistID;
-    private String userID;
+    private int wishlistID; //please do not delete this, por favor
+    private int userID;
     private String name;
 
-    public WishLists(String userID, String name) {
+    public WishLists(int userID, String name) {
         this.userID = userID;
         this.name = name;
     }
@@ -16,11 +16,11 @@ public class WishLists {
 
     }
 
-    public String getUserID() {
+    public int getUserID() {
         return userID;
     }
 
-    public void setUserID(String userID) {
+    public void setUserID(int userID) {
         this.userID = userID;
     }
 
@@ -32,7 +32,7 @@ public class WishLists {
         this.name = name;
     }
 
-    public String getWishlistID() {
+    public int getWishlistID() {
         return wishlistID;
     }
 }

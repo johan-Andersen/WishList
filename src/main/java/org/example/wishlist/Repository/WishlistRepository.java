@@ -46,10 +46,10 @@ public class WishlistRepository {
     public List<WishLists> getWishLists() {
         String sql = "SELECT * FROM wishlists";
         return jdbcTemplate.query(sql, (rs, rowNum) -> new WishLists(
-                rs.getString("title"),
+                rs.getInt("userID"),
                 rs.getString("description")));
-
     }
+
 
     // Example method to test the connection
 
