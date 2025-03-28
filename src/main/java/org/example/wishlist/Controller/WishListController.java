@@ -32,12 +32,14 @@ public class WishListController {
     @PostMapping("/signup")
     public String addUser(@ModelAttribute User user) {
         wishListService.addUser(user);
-        return "profilepage";
+        return "redirect:/wishlist/profilepage";
     }
 
     @GetMapping("/profilepage")
-    public String getProfilePage() {
+    public String getProfilePage(Model model) {
+        model.addAttribute("wishlists", wishListService.getAllWishLists());
         return "profilepage";
+
     }
 
     @GetMapping("/addwishlist")
@@ -49,9 +51,8 @@ public class WishListController {
     @PostMapping("/addwishlist")
     public String addWishList(@ModelAttribute WishLists wishLists) {
         wishListService.addWishList(wishLists);
-        return "profilepage";
+        return "redirect:/wishlist/profilepage";
     }
-
 
 
 

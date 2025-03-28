@@ -36,18 +36,17 @@ public class WishlistRepository {
     }
 
     public void addWishList(WishLists wishLists) {
-        String sql = "INSERT INTO WishLists (userID, name) VALUES (?,?)";
-        jdbcTemplate.update(sql, wishLists.getUserID(), wishLists.getName());
+        String sql = "INSERT INTO WishLists (name) VALUES (?)";
+        jdbcTemplate.update(sql, wishLists.getName());
     }
-
     // Read
 
    // Retrieve all the wishes from the SQL database.
-    public List<WishLists> getWishLists() {
+    public List<WishLists> getAllWishLists() {
         String sql = "SELECT * FROM wishlists";
         return jdbcTemplate.query(sql, (rs, rowNum) -> new WishLists(
-                rs.getInt("userID"),
-                rs.getString("description")));
+                rs.getString("name")));
+
     }
 
 

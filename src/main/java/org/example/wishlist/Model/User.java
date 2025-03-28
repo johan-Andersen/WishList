@@ -3,7 +3,6 @@ package org.example.wishlist.Model;
 public class User {
 
 
-    private int userID;      //userID isnt initialized because its auto incremented
     private String username;
     private String email;
     //mangler password
@@ -14,10 +13,6 @@ public class User {
         this.email = email;
     }
     public User() {
-    }
-
-    public int getUserID() {
-        return userID;
     }
 
     public String getUsername() {
