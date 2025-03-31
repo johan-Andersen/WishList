@@ -45,8 +45,15 @@ public class WishlistRepository {
     public List<WishLists> getAllWishLists() {
         String sql = "SELECT * FROM wishlists";
         return jdbcTemplate.query(sql, (rs, rowNum) -> new WishLists(
+                rs.getInt("wishListID"),
                 rs.getString("name")));
 
+    }
+
+    //DELETE
+    public void deleteWishList(int wishlistID){
+        String sql = "DELETE FROM wishlists WHERE wishlistID = ?";
+        jdbcTemplate.update(sql,wishlistID);
     }
 
 
