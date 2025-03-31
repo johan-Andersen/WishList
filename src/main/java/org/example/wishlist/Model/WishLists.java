@@ -10,6 +10,12 @@ public class WishLists {
     public WishLists(String name) {
         this.name = name;
     }
+
+    public WishLists(int wishlistID, String name) {
+        this.wishlistID = wishlistID;
+        this.name = name;
+    }
+
     public WishLists() {
 
     }
@@ -25,4 +31,9 @@ public class WishLists {
     public int getWishlistID() {
         return wishlistID;
     }
+
+    public void setWishlistID(int wishlistID) {
+        this.wishlistID = wishlistID;
+    }
+
 }
