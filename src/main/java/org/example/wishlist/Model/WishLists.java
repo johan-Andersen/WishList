@@ -12,13 +12,7 @@ public class WishLists {
         this.name = name;
     }
 
-    public WishLists(int wishlistID, String name) {
-        this.wishlistID = wishlistID;
-        this.name = name;
-    }
-
     public WishLists() {
-
     }
 
     public String getName() {
