@@ -44,12 +44,13 @@
             <div class="col" th:each="wishlist : ${wishlists}">
                 <a th:href="@{/wishlist/wishlistpage(id=${wishlist.getWishlistID()})}" class="text-decoration-none">
                     <div class="card shadow-sm">
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
-                             xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
-                             preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title>
-                            <rect width="100%" height="100%" fill="#55595c"></rect>
-                            <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-                        </svg>
+                        <img src="/img_2.png" class="card-img-top" alt="Wishlist image" style="height: 225px; object-fit: cover;">
+                        <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
+                              xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
+                              preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title>
+                             <rect width="100%" height="100%" fill="#55595c"></rect>
+                             <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
+                         </svg> -->
                         <div class="card-body">
                             <p class="card-text" th:text="${wishlist.name}"></p>
                             <div class="d-flex justify-content-between align-items-center">
@@ -59,7 +60,6 @@
                                         <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
                                     </form>
                                 </div>
-                                <small class="text-body-secondary">9 mins</small>
                             </div>
                         </div>
                     </div>
@@ -69,7 +69,7 @@
     </div>
 </div>
 
-<!-- Billede med tekst (END) -->
+<!-- WishLists (END)-->
 
 <!-- Footer -->
 <footer class="py-3 my-4">
