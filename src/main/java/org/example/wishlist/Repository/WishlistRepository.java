@@ -39,14 +39,47 @@ public class WishlistRepository {
         String sql = "INSERT INTO WishLists (name) VALUES (?)";
         jdbcTemplate.update(sql, wishLists.getName());
     }
+
+    public void addWish(Wishes wish) {
+        String sql = "INSERT INTO wishes (wishlistID, name, description, price, link) VALUES (?,?,?,?,?) ";
+        jdbcTemplate.update(sql, wish.getWishListID(), wish.getName(), wish.getDescription(), wish.getPrice(), wish.getLink());
+    }
     // Read
 
    // Retrieve all the wishes from the SQL database.
     public List<WishLists> getAllWishLists() {
         String sql = "SELECT * FROM wishlists";
         return jdbcTemplate.query(sql, (rs, rowNum) -> new WishLists(
+                rs.getInt("wishlistID"),
                 rs.getString("name")));
 
+    }
+    public WishLists getWishListByWishListID(int ID) {
+        String sql = "SELECT * FROM wishlists WHERE wishlistID = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{ID}, (rs, rownum) -> new WishLists(
+                rs.getInt("wishListID"),
+                rs.getString("name")));
+    }
+
+
+    public List<Wishes> getAllWishes() {
+        String sql = "SELECT * FROM wishes";
+        return jdbcTemplate.query(sql, (rs, rownum) -> new Wishes(
+                rs.getInt("wishListID"),
+                rs.getString("name"),
+                rs.getString("description"),
+                rs.getInt("price"),
+                rs.getString("link")));
+    }
+
+    public List<Wishes> getWishesByWishListID(int ID) {
+        String sql = "SELECT * FROM wishes WHERE wishlistID = ?";
+        return jdbcTemplate.query(sql, new Object[]{ID}, (rs, rownum) -> new Wishes(
+                rs.getInt("wishListID"),
+                rs.getString("name"),
+                rs.getString("description"),
+                rs.getInt("price"),
+                rs.getString("link")));
     }
 
 

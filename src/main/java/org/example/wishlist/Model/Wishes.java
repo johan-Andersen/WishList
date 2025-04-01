@@ -4,16 +4,21 @@ public class Wishes {
 
     private int wishID;
     private int wishListID;
+    private String name;
     private String description;
     private int price;
     private String link;
 
-
-    public Wishes(int wishListID, String description, int price, String link) {
+    public Wishes(int wishListID, String name, String description, int price, String link) {
         this.wishListID = wishListID;
+        this.name = name;
         this.description = description;
         this.price = price;
         this.link = link;
+
+    }
+    public Wishes() {
+
     }
 
     public int getWishListID() {
@@ -22,6 +27,14 @@ public class Wishes {
 
     public void setWishListID(int wishListID) {
         this.wishListID = wishListID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {

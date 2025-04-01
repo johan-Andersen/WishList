@@ -7,7 +7,8 @@ public class WishLists {
     private int wishlistID; //please do not delete this, por favor
     private String name;
 
-    public WishLists(String name) {
+    public WishLists(int wishlistID, String name) {
+        this.wishlistID = wishlistID;
         this.name = name;
     }
     public WishLists() {

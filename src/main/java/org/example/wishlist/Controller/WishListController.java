@@ -2,6 +2,7 @@ package org.example.wishlist.Controller;
 
 import org.example.wishlist.Model.User;
 import org.example.wishlist.Model.WishLists;
+import org.example.wishlist.Model.Wishes;
 import org.example.wishlist.Service.WishListService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,22 +55,26 @@ public class WishListController {
         return "redirect:/wishlist/profilepage";
     }
 
+    @GetMapping("/wishlistpage")
+    public String getWishListPage(@RequestParam("id") int wishlistID, Model model) {
+        model.addAttribute("wishes", wishListService.getWishesByWishListID(wishlistID));
+        model.addAttribute("wishlist", wishListService.getWishListByWishListID(wishlistID));
+        return "wishlistpage";
+    }
 
+    @GetMapping("/addwish")
+    public String addwish(@RequestParam("id") int wishlistID, Model model) {
+        Wishes wish = new Wishes();
+        wish.setWishListID(wishlistID);
+        model.addAttribute("wish", wish);
+        return "addwish";
+    }
 
-//    @GetMapping("")
-//    public String getAllAttractions(Model model) {
-//        List<TouristAttraction> attractions = touristService.getAllAttractions();
-//        model.addAttribute("attractions", attractions);
-//        return "attractions";
-//    }
-
-//    @GetMapping("")
-//    public String getAllWishList(Model model) {
-//
-//        List<WishLists> allWishLists = wishListService.
-//
-//        model.addAttribute("wishlists", )
-//    }
+    @PostMapping("/addwish")
+    public String addWish(@ModelAttribute Wishes wish) {
+        wishListService.addWish(wish);
+        return "redirect:/wishlist/wishlistpage?id=" + wish.getWishListID();
+    }
 
 
 

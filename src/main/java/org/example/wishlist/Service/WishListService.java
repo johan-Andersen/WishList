@@ -2,6 +2,7 @@ package org.example.wishlist.Service;
 
 import org.example.wishlist.Model.User;
 import org.example.wishlist.Model.WishLists;
+import org.example.wishlist.Model.Wishes;
 import org.example.wishlist.Repository.WishlistRepository;
 import org.springframework.stereotype.Service;
 
@@ -22,10 +23,20 @@ public class WishListService {
     public void addWishList(WishLists wishList) {
         wishlistRepository.addWishList(wishList);
     }
+    public void addWish(Wishes wish) {
+        wishlistRepository.addWish(wish);
+    }
     public List<WishLists> getAllWishLists() {
         return wishlistRepository.getAllWishLists();
-
     }
-
+    public List<Wishes> getAllWishes() {
+        return wishlistRepository.getAllWishes();
+    }
+    public List<Wishes> getWishesByWishListID(int wishlistID) {
+        return wishlistRepository.getWishesByWishListID(wishlistID);
+    }
+    public WishLists getWishListByWishListID(int ID) {
+        return wishlistRepository.getWishListByWishListID(ID);
+    }
 
 }
