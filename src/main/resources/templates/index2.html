@@ -14,11 +14,15 @@
   <div class="container-fluid">
     <a class="navbar-brand" href="index.html">WishChain</a>
     <ul class="navbar-nav">
-      <li>
-        <button type="button" class="btn btn-light" onclick="window.location.href='login.html'">Log in</button>
+      <li class="nav-item me-2">
+        <form th:action="@{/wishlist/login}" method="get">
+          <button type="submit" class="btn btn-light">Log in</button>
+        </form>
       </li>
-      <li>
-        <button type="button" class="btn btn-light">Sign up</button>
+      <li class="nav-item">
+        <form th:action="@{/wishlist/signup}" method="get">
+          <button type="submit" class="btn btn-light">Sign up</button>
+        </form>
       </li>
     </ul>
   </div>
