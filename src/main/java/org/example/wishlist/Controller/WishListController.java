@@ -30,6 +30,7 @@ public class WishListController {
         model.addAttribute("user", new User());
         return "signup";
     }
+
     @PostMapping("/signup")
     public String addUser(@ModelAttribute User user) {
         wishListService.addUser(user);
@@ -60,6 +61,7 @@ public class WishListController {
         wishListService.deleteWishList(wishListID);
         return "redirect:/wishlist/profilepage";
     }
+
     @GetMapping("/wishlistpage")
     public String getWishListPage(@RequestParam("id") int wishlistID, Model model) {
         model.addAttribute("wishes", wishListService.getWishesByWishListID(wishlistID));
@@ -82,12 +84,9 @@ public class WishListController {
     }
 
     @PostMapping("/deleteWish/{wishID}")
-    public String deleteWish(@PathVariable int wishID, @RequestParam int wishlistID) {
-        wishListService.deleteWishFromWishList(wishID, wishlistID);
+    public String deleteWish(@PathVariable int wishID) {
+        wishListService.deleteWishFromWishList(wishID);
         return "redirect:/wishlist/profilepage";
     }
-
-
-
 
 }

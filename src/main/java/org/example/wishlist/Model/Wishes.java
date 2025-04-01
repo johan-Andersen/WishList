@@ -21,6 +21,15 @@ public class Wishes {
 
     }
 
+    public Wishes(int wishID, int wishListID, String name, String description, int price, String link) {
+        this.wishID = wishID;
+        this.wishListID = wishListID;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.link = link;
+    }
+
     public int getWishListID() {
         return wishListID;
     }

@@ -76,6 +76,7 @@ public class WishlistRepository {
     public List<Wishes> getWishesByWishListID(int ID) {
         String sql = "SELECT * FROM wishes WHERE wishlistID = ?";
         return jdbcTemplate.query(sql, new Object[]{ID}, (rs, rownum) -> new Wishes(
+                rs.getInt("wishID"),
                 rs.getInt("wishListID"),
                 rs.getString("name"),
                 rs.getString("description"),
@@ -89,9 +90,9 @@ public class WishlistRepository {
         jdbcTemplate.update(sql, wishListID);
     }
 
-    public void deleteWishFromWishList(int wishID, int wishListID) {
-        String sql = "DELETE FROM wishes where wishID = ? AND wishListID = ?";
-        jdbcTemplate.update(sql, wishID, wishListID);
+    public void deleteWishFromWishList(int wishID) {
+        String sql = "DELETE FROM wishes where wishID = ?";
+        jdbcTemplate.update(sql, wishID);
 
     }
 
