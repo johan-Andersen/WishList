@@ -20,27 +20,37 @@ public class WishListService {
     public void addUser(User user) {
         wishlistRepository.addUser(user);
     }
+
     public void addWishList(WishLists wishList) {
         wishlistRepository.addWishList(wishList);
     }
+
     public void addWish(Wishes wish) {
         wishlistRepository.addWish(wish);
     }
+
     public List<WishLists> getAllWishLists() {
         return wishlistRepository.getAllWishLists();
     }
+
     public List<Wishes> getAllWishes() {
         return wishlistRepository.getAllWishes();
     }
+
     public List<Wishes> getWishesByWishListID(int wishlistID) {
         return wishlistRepository.getWishesByWishListID(wishlistID);
     }
+
     public WishLists getWishListByWishListID(int ID) {
         return wishlistRepository.getWishListByWishListID(ID);
     }
 
-    public void deleteWishList(int wishListId){
+    public void deleteWishList(int wishListId) {
         wishlistRepository.deleteWishList(wishListId);
+    }
+
+    public void deleteWishFromWishList(int wishID, int wishListID) {
+        wishlistRepository.deleteWishFromWishList(wishID, wishListID);
     }
 
 

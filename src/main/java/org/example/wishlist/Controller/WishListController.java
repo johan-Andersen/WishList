@@ -81,6 +81,12 @@ public class WishListController {
         return "redirect:/wishlist/wishlistpage?id=" + wish.getWishListID();
     }
 
+    @PostMapping("/deleteWish/{wishID}")
+    public String deleteWish(@PathVariable int wishID, @RequestParam int wishlistID) {
+        wishListService.deleteWishFromWishList(wishID, wishlistID);
+        return "redirect:/wishlist/profilepage";
+    }
+
 
 
 
