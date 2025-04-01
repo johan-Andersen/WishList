@@ -44,9 +44,9 @@ public class WishlistRepository {
         String sql = "INSERT INTO wishes (wishlistID, name, description, price, link) VALUES (?,?,?,?,?) ";
         jdbcTemplate.update(sql, wish.getWishListID(), wish.getName(), wish.getDescription(), wish.getPrice(), wish.getLink());
     }
-    // Read
 
-   // Retrieve all the wishes from the SQL database.
+    // Read
+    // Retrieve all the wishes from the SQL database.
     public List<WishLists> getAllWishLists() {
         String sql = "SELECT * FROM wishlists";
         return jdbcTemplate.query(sql, (rs, rowNum) -> new WishLists(
@@ -54,6 +54,7 @@ public class WishlistRepository {
                 rs.getString("name")));
 
     }
+
     public WishLists getWishListByWishListID(int ID) {
         String sql = "SELECT * FROM wishlists WHERE wishlistID = ?";
         return jdbcTemplate.queryForObject(sql, new Object[]{ID}, (rs, rownum) -> new WishLists(
@@ -83,9 +84,15 @@ public class WishlistRepository {
     }
 
     //DELETE
-    public void deleteWishList(int wishlistID){
+    public void deleteWishList(int wishListID) {
         String sql = "DELETE FROM wishlists WHERE wishlistID = ?";
-        jdbcTemplate.update(sql,wishlistID);
+        jdbcTemplate.update(sql, wishListID);
+    }
+
+    public void deleteWishFromWishList(int wishID, int wishListID) {
+        String sql = "DELETE FROM wishes where wishID = ? AND wishListID = ?";
+        jdbcTemplate.update(sql, wishID, wishListID);
+
     }
 
 
