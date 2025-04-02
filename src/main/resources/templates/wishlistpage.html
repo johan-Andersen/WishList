@@ -34,39 +34,37 @@
 </section>
 <!--- Username + ADD button (END) -->
 
-<!-- WishLists -->
+<!-- Wish -->
 <div class="album py-5 bg-body-tertiary">
     <div class="container">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             <div class="col" th:each="wish : ${wishes}">
-                <a th:href="@{/wishlist/wishpage(id=${wish.getWishID()})}">
                     <div class="card shadow-sm">
-                        <img src="/wish.png" class="card-img-top" alt="Wishlist image" style="height: 225px; object-fit: cover;">
-                        <!--  <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
-                               xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
-                               preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title>
-                              <rect width="100%" height="100%" fill="#55595c"></rect>
-                              <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-                          </svg> -->
-                          <div class="card-body">
-                              <p class="card-text" th:text="${wish.name}"> </p>
-                              <div class="d-flex justify-content-between align-items-center">
-                                  <div class="btn-group">
-                                      <form th:action="@{/wishlist/deleteWish/{wishID}(wishID=${wish.wishID})}" method="post">
-                                      <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
-                                      </form>
-                                      <a type="button" class="btn btn-sm btn-outline-secondary" th:href="@{/wishlist/editwish(id=${wish.getWishID()})}">Edit</a>
-                                  </div>
-                                  <small class="text-body-secondary">9 mins</small>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
+                        <img src="/wish.png" class="card-img-top" alt="Wishlist image"
+                             style="height: 225px; object-fit: cover;">
+                        <div class="card-body">
+                            <p class="card-text" th:text="${wish.name}"></p>
+                            <p class="card-text" th:text="|Description: ${wish.description}|"></p>
+                            <p class="card-text" th:text="|Link: ${wish.link}|"></p>
+                            <p class="card-text" th:text="|Price: ${wish.price}|"></p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <form th:action="@{/wishlist/deleteWish/{wishID}(wishID=${wish.wishID})}"
+                                          method="post">
+                                        <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                                    </form>
+                                    <a type="button" class="btn btn-sm btn-outline-secondary"
+                                       th:href="@{/wishlist/editwish(id=${wish.getWishID()})}">Edit</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-  <!-- Billede med tekst (END) -->
+<!-- Wish (END) -->
 
 <!-- Footer -->
 <footer class="py-3 my-4">
