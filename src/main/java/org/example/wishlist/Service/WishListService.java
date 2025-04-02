@@ -5,12 +5,10 @@ import org.example.wishlist.Model.WishLists;
 import org.example.wishlist.Model.Wishes;
 import org.example.wishlist.Repository.WishlistRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
 public class WishListService {
-
     private final WishlistRepository wishlistRepository;
 
     public WishListService(WishlistRepository wishlistRepository) {
@@ -33,6 +31,7 @@ public class WishListService {
         return wishlistRepository.getAllWishLists();
     }
 
+    //Not implemented yet!!!
     public List<Wishes> getAllWishes() {
         return wishlistRepository.getAllWishes();
     }
@@ -58,6 +57,4 @@ public class WishListService {
     public void updateWish(int ID, Wishes wish) {
         wishlistRepository.updateWish(ID, wish);
     }
-
-
 }

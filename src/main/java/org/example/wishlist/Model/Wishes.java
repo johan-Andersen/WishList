@@ -1,7 +1,6 @@
 package org.example.wishlist.Model;
 
 public class Wishes {
-
     private int wishID;
     private int wishListID;
     private String name;
@@ -16,10 +15,9 @@ public class Wishes {
         this.description = description;
         this.price = price;
         this.link = link;
-
     }
-    public Wishes() {
 
+    public Wishes() {
     }
 
     public void setWishID(int wishID) {
@@ -46,6 +44,7 @@ public class Wishes {
         return description;
     }
 
+    //Not implemented yet!!!
     public void setDescription(String description) {
         this.description = description;
     }
@@ -54,6 +53,7 @@ public class Wishes {
         return price;
     }
 
+    //Not implemented yet!!!
     public void setPrice(int price) {
         this.price = price;
     }
@@ -62,6 +62,7 @@ public class Wishes {
         return link;
     }
 
+    //Not implemented yet!!!
     public void setLink(String link) {
         this.link = link;
     }

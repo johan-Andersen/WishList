@@ -1,9 +1,6 @@
 package org.example.wishlist.Model;
 
-import java.util.List;
-
 public class WishLists {
-
     private int wishlistID; //please do not delete this, por favor
     private String name;
 
@@ -27,6 +24,7 @@ public class WishLists {
         return wishlistID;
     }
 
+    //Not implemented yet!!!
     public void setWishlistID(int wishlistID) {
         this.wishlistID = wishlistID;
     }

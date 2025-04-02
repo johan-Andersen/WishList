@@ -6,13 +6,10 @@ import org.example.wishlist.Model.Wishes;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import org.springframework.jdbc.core.JdbcTemplate;
-
 import java.util.List;
-
 
 @Repository
 public class WishlistRepository {
-
     @Value("${DEV_DATABASE_URL}")
     private String dbURL;
     @Value("${DEV_USERNAME}")
@@ -22,31 +19,32 @@ public class WishlistRepository {
 
     private final JdbcTemplate jdbcTemplate;
 
+    // Constructor to initialize JdbcTemplate
     public WishlistRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    // C (create) R (read) U (update) D (delete)
+    // CRUD Methods (Create, Read, Update, Delete)
 
-    // Create
-
+    // Adds a new user to the database (Create)
     public void addUser(User user) {
         String sql = "INSERT INTO Users (username, email) VALUES (?,?)";
         jdbcTemplate.update(sql, user.getUsername(), user.getEmail());
     }
 
+    // Adds a new wishlist to the database (Create)
     public void addWishList(WishLists wishLists) {
         String sql = "INSERT INTO WishLists (name) VALUES (?)";
         jdbcTemplate.update(sql, wishLists.getName());
     }
 
+    // Adds a new wish to the database (Create)
     public void addWish(Wishes wish) {
         String sql = "INSERT INTO wishes (wishlistID, name, description, price, link) VALUES (?,?,?,?,?) ";
         jdbcTemplate.update(sql, wish.getWishListID(), wish.getName(), wish.getDescription(), wish.getPrice(), wish.getLink());
     }
 
-    // Read
-    // Retrieve all the wishes from the SQL database.
+    // Retrieves all wishlists from the database (Read)
     public List<WishLists> getAllWishLists() {
         String sql = "SELECT * FROM wishlists";
         return jdbcTemplate.query(sql, (rs, rowNum) -> new WishLists(
@@ -55,6 +53,7 @@ public class WishlistRepository {
 
     }
 
+    // Retrieves a specific wishlist by its ID (Read)
     public WishLists getWishListByWishListID(int ID) {
         String sql = "SELECT * FROM wishlists WHERE wishlistID = ?";
         return jdbcTemplate.queryForObject(sql, new Object[]{ID}, (rs, rownum) -> new WishLists(
@@ -62,7 +61,7 @@ public class WishlistRepository {
                 rs.getString("name")));
     }
 
-
+    // Retrieves all wishes from the database (Read)
     public List<Wishes> getAllWishes() {
         String sql = "SELECT * FROM wishes";
         return jdbcTemplate.query(sql, (rs, rownum) -> new Wishes(
@@ -74,6 +73,7 @@ public class WishlistRepository {
                 rs.getString("link")));
     }
 
+    // Retrieves all wishes for a specific wishlist by its ID (Read)
     public List<Wishes> getWishesByWishListID(int ID) {
         String sql = "SELECT * FROM wishes WHERE wishlistID = ?";
         return jdbcTemplate.query(sql, new Object[]{ID}, (rs, rownum) -> new Wishes(
@@ -101,22 +101,19 @@ public class WishlistRepository {
         jdbcTemplate.update(sql, wish.getName(), wish.getDescription(), wish.getPrice(), wish.getLink(), wishID);
     }
 
-    //DELETE
+    // Deletes a wishlist from the database (Delete)
     public void deleteWishList(int wishListID) {
         String sql = "DELETE FROM wishlists WHERE wishlistID = ?";
         jdbcTemplate.update(sql, wishListID);
     }
 
+    // Deletes a wish from a wishlist in the database (Delete)
     public void deleteWishFromWishList(int wishID) {
         String sql = "DELETE FROM wishes where wishID = ?";
         jdbcTemplate.update(sql, wishID);
-
     }
 
 
 
-
     // Example method to test the connection
-
-
 }
