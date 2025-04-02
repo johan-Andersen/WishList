@@ -45,7 +45,9 @@
                         <div class="card-body">
                             <p class="card-text" th:text="${wish.name}"></p>
                             <p class="card-text" th:text="|Description: ${wish.description}|"></p>
-                            <p class="card-text" th:text="|Link: ${wish.link}|"></p>
+                            <p class="card-text">
+                                Link: <a th:href="${wish.link}" th:text="${wish.link}" target="_blank"></a>
+                            </p>
                             <p class="card-text" th:text="|Price: ${wish.price}|"></p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
