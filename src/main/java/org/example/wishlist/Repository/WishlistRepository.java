@@ -66,6 +66,7 @@ public class WishlistRepository {
     public List<Wishes> getAllWishes() {
         String sql = "SELECT * FROM wishes";
         return jdbcTemplate.query(sql, (rs, rownum) -> new Wishes(
+                rs.getInt("wishID"),
                 rs.getInt("wishListID"),
                 rs.getString("name"),
                 rs.getString("description"),
@@ -83,6 +84,22 @@ public class WishlistRepository {
                 rs.getInt("price"),
                 rs.getString("link")));
     }
+    public Wishes getWishByWishID(int ID) {
+        String sql = "SELECT * FROM wishes WHERE wishID = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{ID}, (rs, rowNum) -> new Wishes(
+                rs.getInt("wishID"),
+                rs.getInt("wishListID"),
+                rs.getString("name"),
+                rs.getString("description"),
+                rs.getInt("price"),
+                rs.getString("link")));
+    }
+
+    //UPDATE
+    public void updateWish(int wishID, Wishes wish) {
+        String sql = "UPDATE wishes SET name = ?, description = ?, price = ?, link = ? WHERE wishID = ?";
+        jdbcTemplate.update(sql, wish.getName(), wish.getDescription(), wish.getPrice(), wish.getLink(), wishID);
+    }
 
     //DELETE
     public void deleteWishList(int wishListID) {
@@ -95,6 +112,8 @@ public class WishlistRepository {
         jdbcTemplate.update(sql, wishID);
 
     }
+
+
 
 
     // Example method to test the connection

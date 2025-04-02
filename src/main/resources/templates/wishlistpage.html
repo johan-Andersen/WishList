@@ -28,17 +28,19 @@
     <div class="row py-1">
         <div class="col-lg-6 col-md-8">
             <h1 class="fw-light" th:text="${wishlist.name}"></h1>
-            <a type="button" class="btn btn-primary my-2" th:href="@{/wishlist/addwish(id=${wishlist.getWishlistID()})}">+ Add wish</a>
+            <a type="button" class="btn btn-primary my-2"
+               th:href="@{/wishlist/addwish(id=${wishlist.getWishlistID()})}">+ Add wish</a>
         </div>
     </div>
 </section>
 <!--- Username + ADD button (END) -->
 
 <!-- WishLists -->
-    <div class="album py-5 bg-body-tertiary" >
-        <div class="container">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                <div class="col" th:each="wish : ${wishes}">
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="col" th:each="wish : ${wishes}">
+                <a th:href="@{/wishlist/wishpage(id=${wish.getWishID()})}">
                     <div class="card shadow-sm">
                         <img src="/wish.png" class="card-img-top" alt="Wishlist image" style="height: 225px; object-fit: cover;">
                         <!--  <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
@@ -54,7 +56,7 @@
                                       <form th:action="@{/wishlist/deleteWish/{wishID}(wishID=${wish.wishID})}" method="post">
                                       <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
                                       </form>
-                                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                      <a type="button" class="btn btn-sm btn-outline-secondary" th:href="@{/wishlist/editwish(id=${wish.getWishID()})}">Edit</a>
                                   </div>
                                   <small class="text-body-secondary">9 mins</small>
                               </div>
