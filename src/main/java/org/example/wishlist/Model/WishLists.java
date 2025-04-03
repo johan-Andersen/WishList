@@ -25,8 +25,12 @@ public class WishLists {
     }
 
     //Not implemented yet!!!
-    public void setWishlistID(int wishlistID) {
+    public void setWishlistID(int wishlistID
+    ) {
         this.wishlistID = wishlistID;
     }
 
+    public void setId(int wishListID) {
+        this.wishlistID = wishListID;
+    }
 }
