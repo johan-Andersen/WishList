@@ -41,7 +41,7 @@
             <div class="col" th:each="wish : ${wishes}">
                     <div class="card shadow-sm">
                         <img src="/wish.png" class="card-img-top" alt="Wishlist image"
-                             style="height: 225px; object-fit: cover;">
+                             style="height: 225px; object-fit: contain; width: 100%; max-width: 100%;">
                         <div class="card-body">
                             <p class="card-text" th:text="${wish.name}"></p>
                             <p class="card-text" th:text="|Description: ${wish.description}|"></p>
