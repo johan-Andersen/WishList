@@ -37,7 +37,23 @@ public class WishListController {
     @PostMapping("/signup")
     public String addUser(@ModelAttribute User user) {
         wishListService.addUser(user);
-        return "redirect:/wishlist/profilepage";
+        return "redirect:/wishlist/login";
+    }
+
+    @GetMapping("/login")
+    public String getLoginPage() {
+        return "login";
+    }
+    @PostMapping("/checkcredentials")
+    public String checkCredentials(@RequestParam String email, @RequestParam String password) {
+
+        User user = wishListService.checkCredentials(email, password);
+
+        if (user != null) {
+            return "redirect:/wishlist/profilepage?id=" + user.getUserID();
+        } else {
+            return "redirect:/wishlist/login"; // Reload login page with an error message
+        }
     }
 
     // Displays the user's profile page with all wishlists (Read)

@@ -9,25 +9,25 @@
 <body class="d-flex justify-content-center align-items-center vh-100 bg-body-tertiary">
 
 <main class="card p-4 shadow" style="width: 100%; max-width: 400px;">
-    <form>
-        <h1 class="h3 mb-3 fw-normal text-center">Please login</h1>
+    <form th:action="@{/wishlist/login}" method="post">
+        <h1 class="h3 mb-3 fw-normal text-center">Please log in</h1>
 
         <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-            <label for="floatingInput">Email address</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required>
+            <label for="email">Email address</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-            <label for="floatingPassword">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+            <label for="password">Password</label>
         </div>
 
         <p class="card-text">
             <a href="/wishlist/signup">Sign up here</a>
         </p>
 
-
         <button class="btn btn-primary w-100 py-2" type="submit">Login</button>
     </form>
+
 </main>
 
 </body>
