@@ -27,10 +27,10 @@ public class WishLists {
     }
 
     //Not implemented yet!!!
-    public void setWishlistID(int wishlistID) {
+    public void setWishlistID(int wishlistID
+    ) {
         this.wishlistID = wishlistID;
     }
-
     public int getUserID() {
         return userID;
     }
@@ -38,6 +38,4 @@ public class WishLists {
     public void setUserID(int userID) {
         this.userID = userID;
     }
-
-
 }
