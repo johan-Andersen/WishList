@@ -1,4 +1,4 @@
-package org.example.wishlist.Controller;
+package org.example.wishlist.controller;
 
 import org.example.wishlist.Model.WishLists;
 import org.example.wishlist.Model.Wishes;
@@ -73,7 +73,7 @@ class WishListControllerTest {
 
     @Test
     void showProfilePageWithWishlists() throws Exception {
-
+        //TODO FIX SO METHOD FITS TO CONSTRUCTOR
         List<WishLists> wishlists = Arrays.asList(new WishLists(1, "birhtday"), new WishLists(2, "")); //Instances of wishLists so we can run the test
         when(wishListService.getAllWishLists()).thenReturn(wishlists); //Makes the method getAllWishLists return the mockup list and not the database
 
@@ -113,7 +113,7 @@ class WishListControllerTest {
     void testDeleteWishList() throws Exception {
         int wishListID = 1;
         WishLists wishList = new WishLists(); // INSTANCE OF WISHLIST
-        wishList.setId(wishListID); //SETS ID TO 1
+        wishList.setUserID(wishListID); //SETS ID TO 1
         wishList.setName("Christmas"); //SETS NAME TO "CHRISTMAS"
 
         when(wishListService.getWishListByWishListID(wishListID)).thenReturn(wishList); //MOCKUP WISHLIST IS GETTING RETURNED WHEN THE METHOD IS CALLED
@@ -137,6 +137,7 @@ class WishListControllerTest {
                 .andExpect(model().attributeExists("wish")) //CHECKS THAT THE MODEL HAS THE ATTRIBUTE WISH
                 .andExpect(model().attribute("wish", hasProperty("wishListID", equalTo(wishlistID)))); // CHECKS THAT wish HAS THE CORRECT wishListID
     }
+
     @Test
     void testPostUpdateWish() throws Exception {
         int wishID = 1;
@@ -169,7 +170,6 @@ class WishListControllerTest {
                 .andExpect(view().name("editwish"))
                 .andExpect(model().attributeExists("wish"));
     }
-
 
 
     /*
