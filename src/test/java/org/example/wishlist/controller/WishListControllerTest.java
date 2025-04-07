@@ -66,7 +66,7 @@ class WishListControllerTest {
 
     @Test
     void showProfilePage() throws Exception {
-        mockMvc.perform(get("/wishlist/profilepage")).andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("redirect:/wishlist/login"));
+        mockMvc.perform(get("/wishlist/profilepage")).andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/wishlist/login"));
 
     }
 
@@ -91,7 +91,7 @@ class WishListControllerTest {
     @Test
     void showAddWishListPage() throws Exception {
         //METHOD FOR CONFIRMING IT IS THE RIGHT PAGE THAT SHOWS UP
-        mockMvc.perform(get("/wishlist/addwishlist")).andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("redirect:/wishlist/login"));
+        mockMvc.perform(get("/wishlist/addwishlist")).andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/wishlist/login"));
 
     }
 
