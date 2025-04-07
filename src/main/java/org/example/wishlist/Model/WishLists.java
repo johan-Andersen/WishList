@@ -31,7 +31,6 @@ public class WishLists {
     ) {
         this.wishlistID = wishlistID;
     }
-
     public int getUserID() {
         return userID;
     }
@@ -39,5 +38,4 @@ public class WishLists {
     public void setUserID(int userID) {
         this.userID = userID;
     }
-
 }
