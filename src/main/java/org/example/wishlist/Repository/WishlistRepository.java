@@ -28,14 +28,14 @@ public class WishlistRepository {
 
     // Adds a new user to the database (Create)
     public void addUser(User user) {
-        String sql = "INSERT INTO Users (username, email) VALUES (?,?)";
-        jdbcTemplate.update(sql, user.getUsername(), user.getEmail());
+        String sql = "INSERT INTO Users (username, email, password) VALUES (?,?,?)";
+        jdbcTemplate.update(sql, user.getUsername(), user.getEmail(), user.getPassword());
     }
 
     // Adds a new wishlist to the database (Create)
     public void addWishList(WishLists wishLists) {
-        String sql = "INSERT INTO WishLists (name) VALUES (?)";
-        jdbcTemplate.update(sql, wishLists.getName());
+        String sql = "INSERT INTO WishLists (userID, name) VALUES (?, ?)";
+        jdbcTemplate.update(sql, wishLists.getUserID(), wishLists.getName());
     }
 
     // Adds a new wish to the database (Create)
@@ -49,6 +49,7 @@ public class WishlistRepository {
         String sql = "SELECT * FROM wishlists";
         return jdbcTemplate.query(sql, (rs, rowNum) -> new WishLists(
                 rs.getInt("wishListID"),
+                rs.getInt("userID"),
                 rs.getString("name")));
 
     }
@@ -58,7 +59,18 @@ public class WishlistRepository {
         String sql = "SELECT * FROM wishlists WHERE wishlistID = ?";
         return jdbcTemplate.queryForObject(sql, new Object[]{ID}, (rs, rownum) -> new WishLists(
                 rs.getInt("wishListID"),
+                rs.getInt("userID"),
                 rs.getString("name")));
+    }
+
+    public List<WishLists> getWishlistsByUserID(int userID) {
+
+        String sql = "SELECT * FROM wishlists WHERE userID = ?";
+        return jdbcTemplate.query(sql, (rs, rowNum) -> new WishLists(
+                rs.getInt("wishListID"),
+                rs.getInt("userID"),
+                rs.getString("name")),
+                userID);
     }
 
     // Retrieves all wishes from the database (Read)
@@ -111,6 +123,21 @@ public class WishlistRepository {
     public void deleteWishFromWishList(int wishID) {
         String sql = "DELETE FROM wishes where wishID = ?";
         jdbcTemplate.update(sql, wishID);
+    }
+
+    public User checkCredentials(String email, String password) {
+        String sql = "SELECT * FROM Users WHERE email = ? AND password = ?";
+
+        try {
+            return jdbcTemplate.queryForObject(sql, (rs, rowNum) -> new User(
+                            rs.getInt("userID"),
+                            rs.getString("username"),
+                            rs.getString("email"),
+                            rs.getString("password")),
+                    email, password);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
 

@@ -10,6 +10,8 @@
 </head>
 <body class="d-flex justify-content-center align-items-center vh-100 bg-body-tertiary">
 <main class="card p-4 shadow" style="width: 100%; max-width: 400px;">
+                    
+    <form th:action="@{/wishlist/addwishlist}" th:object="${wishList}" method="post">
 
     <!-- Form to add a new wish list -->
     <form th:action="@{/wishlist/addwishlist}" method="post">
@@ -19,6 +21,9 @@
 
         <!-- Input field for the wish list name -->
         <div class="form-floating mb-3">
+          
+            <input type="hidden" class="form-control" id="password" th:field="${wishList.userID}">
+          
             <input type="text" class="form-control" id="name" name="name" placeholder="My birthday">
             <label for="name">Wish list name</label>
         </div>
