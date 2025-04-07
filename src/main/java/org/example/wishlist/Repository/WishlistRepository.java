@@ -34,7 +34,7 @@ public class WishlistRepository {
 
     // Adds a new wishlist to the database (Create)
     public void addWishList(WishLists wishLists) {
-        String sql = "INSERT INTO WishLists (userID, name) VALUES (?)";
+        String sql = "INSERT INTO WishLists (userID, name) VALUES (?, ?)";
         jdbcTemplate.update(sql, wishLists.getUserID(), wishLists.getName());
     }
 
@@ -61,6 +61,16 @@ public class WishlistRepository {
                 rs.getInt("wishListID"),
                 rs.getInt("userID"),
                 rs.getString("name")));
+    }
+
+    public List<WishLists> getWishlistsByUserID(int userID) {
+
+        String sql = "SELECT * FROM wishlists WHERE userID = ?";
+        return jdbcTemplate.query(sql, (rs, rowNum) -> new WishLists(
+                rs.getInt("wishListID"),
+                rs.getInt("userID"),
+                rs.getString("name")),
+                userID);
     }
 
     // Retrieves all wishes from the database (Read)
@@ -116,7 +126,7 @@ public class WishlistRepository {
     }
 
     public User checkCredentials(String email, String password) {
-        String sql = "SELECT * FROM User WHERE email = ? AND password = ?";
+        String sql = "SELECT * FROM Users WHERE email = ? AND password = ?";
 
         try {
             return jdbcTemplate.queryForObject(sql, (rs, rowNum) -> new User(

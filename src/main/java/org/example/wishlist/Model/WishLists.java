@@ -38,9 +38,6 @@ public class WishLists {
     public void setUserID(int userID) {
         this.userID = userID;
     }
-    public User checkCredentials(String email, String password) {
-
-    }
 
 
 }

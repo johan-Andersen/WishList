@@ -9,9 +9,8 @@
 <body class="d-flex justify-content-center align-items-center vh-100 bg-body-tertiary">
 
 <main class="card p-4 shadow" style="width: 100%; max-width: 400px;">
-    <form th:action="@{/wishlist/login}" method="post">
+    <form th:action="@{/wishlist/checkcredentials}" method="post">
         <h1 class="h3 mb-3 fw-normal text-center">Please log in</h1>
-
         <div class="form-floating mb-3">
             <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required>
             <label for="email">Email address</label>

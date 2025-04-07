@@ -1,9 +1,11 @@
 package org.example.wishlist.Controller;
 
+import jakarta.servlet.http.HttpSession;
 import org.example.wishlist.Model.User;
 import org.example.wishlist.Model.WishLists;
 import org.example.wishlist.Model.Wishes;
 import org.example.wishlist.Service.WishListService;
+import org.springframework.data.relational.core.sql.In;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -45,12 +47,13 @@ public class WishListController {
         return "login";
     }
     @PostMapping("/checkcredentials")
-    public String checkCredentials(@RequestParam String email, @RequestParam String password) {
+    public String checkCredentials(@RequestParam String email, @RequestParam String password, HttpSession session) {
 
         User user = wishListService.checkCredentials(email, password);
 
         if (user != null) {
-            return "redirect:/wishlist/profilepage?id=" + user.getUserID();
+            session.setAttribute("userID", user.getUserID());
+            return "redirect:/wishlist/profilepage";
         } else {
             return "redirect:/wishlist/login"; // Reload login page with an error message
         }
@@ -58,15 +61,33 @@ public class WishListController {
 
     // Displays the user's profile page with all wishlists (Read)
     @GetMapping("/profilepage")
-    public String getProfilePage(Model model) {
-        model.addAttribute("wishlists", wishListService.getAllWishLists());
+    public String getProfilePage(HttpSession session, Model model) {
+        Integer userID = (Integer)  session.getAttribute("userID");
+
+        if(userID == null) {
+            return "redirect:/wishlist/login";
+        }
+
+        model.addAttribute("wishlists", wishListService.getWishListsByUserID(userID));
         return "profilepage";
     }
 
     // Displays the page to add a new wishlist (Read)
     @GetMapping("/addwishlist")
-    public String addWishList(Model model) {
-        model.addAttribute("wishList", new WishLists());
+    public String addWishList(HttpSession session, Model model) {
+        Integer userID = (Integer) session.getAttribute("userID");
+
+        if(userID == null) {
+            return "redirect:/wishlist/login";
+        }
+
+        WishLists wishList = new WishLists();
+        wishList.setUserID(userID);
+
+
+        System.out.println("userid is : " + wishList.getUserID());
+
+        model.addAttribute("wishList", wishList);
         return "addwishlist";
     }
 
@@ -86,7 +107,13 @@ public class WishListController {
 
     // Displays a specific wishlist and its wishes (Read)
     @GetMapping("/wishlistpage")
-    public String getWishListPage(@RequestParam("id") int wishlistID, Model model) {
+    public String getWishListPage(@RequestParam("id") int wishlistID, HttpSession session, Model model) {
+        Integer userID = (Integer) session.getAttribute("userID");
+
+        if(userID == null) {
+            return "redirect:/wishes/login";
+        }
+
         model.addAttribute("wishes", wishListService.getWishesByWishListID(wishlistID));
         model.addAttribute("wishlist", wishListService.getWishListByWishListID(wishlistID));
         return "wishlistpage";
