@@ -2,10 +2,12 @@ package org.example.wishlist.Model;
 
 public class WishLists {
     private int wishlistID; //please do not delete this, por favor
+    private int userID;
     private String name;
 
-    public WishLists(int wishlistID, String name) {
+    public WishLists(int wishlistID, int userID, String name) {
         this.wishlistID = wishlistID;
+        this.userID = userID;
         this.name = name;
     }
 
@@ -29,8 +31,11 @@ public class WishLists {
     ) {
         this.wishlistID = wishlistID;
     }
+    public int getUserID() {
+        return userID;
+    }
 
-    public void setId(int wishListID) {
-        this.wishlistID = wishListID;
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 }

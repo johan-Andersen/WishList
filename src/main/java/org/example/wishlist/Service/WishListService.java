@@ -57,4 +57,12 @@ public class WishListService {
     public void updateWish(int ID, Wishes wish) {
         wishlistRepository.updateWish(ID, wish);
     }
+    public User checkCredentials(String email, String password) {
+        return wishlistRepository.checkCredentials(email, password);
+    }
+    public List<WishLists> getWishListsByUserID(int userID) {
+        return wishlistRepository.getWishlistsByUserID(userID);
+    }
+
+
 }
