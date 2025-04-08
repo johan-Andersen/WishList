@@ -127,48 +127,59 @@ class WishListControllerTest {
 
 
     @Test
-    void getAddWishPage() throws Exception {
+    void getAddWishPageWhenLoggedIn() throws Exception {
         int wishlistID = 1;
 
-        mockMvc.perform(get("/wishlist/addwish").param("id", String.valueOf(wishlistID)))
-                .andExpect(status().isOk()) // EXPECTS CODE 200 OK
-                .andExpect(view().name("addwish")) //CHECKS THAT IT RETURNS THE HTML FILE addwish
-                .andExpect(model().attributeExists("wish")) //CHECKS THAT THE MODEL HAS THE ATTRIBUTE WISH
-                .andExpect(model().attribute("wish", hasProperty("wishListID", equalTo(wishlistID)))); // CHECKS THAT wish HAS THE CORRECT wishListID
+        mockMvc.perform(get("/wishlist/addwish")
+                        .param("id", String.valueOf(wishlistID))
+                        .sessionAttr("userID", 42)) // bruger er logget ind
+                .andExpect(status().isOk())
+                .andExpect(view().name("addwish"))
+                .andExpect(model().attributeExists("wish"))
+                .andExpect(model().attribute("wish", hasProperty("wishListID", equalTo(wishlistID))));
     }
-
     @Test
-    void getEditWishPage() throws Exception {
+    void getEditWishPageWhenLoggedIn() throws Exception {
         int wishID = 1;
         Wishes wish = new Wishes();
-        wish.setWishID(1);
+        wish.setWishID(wishID);
         wish.setName("NikeSKo");
 
         when(wishListService.getWishByWishID(wishID)).thenReturn(wish);
 
-        mockMvc.perform(get("/wishlist/editwish").param("id", String.valueOf(wishID)))
+        mockMvc.perform(get("/wishlist/editwish")
+                        .param("id", String.valueOf(wishID))
+                        .sessionAttr("userID", 42)) // simulerer login
                 .andExpect(status().isOk())
                 .andExpect(view().name("editwish"))
-                .andExpect(model().attributeExists("wish"));
+                .andExpect(model().attributeExists("wish"))
+                .andExpect(model().attribute("wish", hasProperty("wishID", equalTo(wishID))))
+                .andExpect(model().attribute("wish", hasProperty("name", equalTo("NikeSKo"))));
     }
 
     @Test
-    void getWishPage_ReturnsEditwishViewAndModel() throws Exception {
+    void getWishPageReturnsEditwishViewAndModelWhenLoggedIn() throws Exception {
         int wishID = 10;
         Wishes dummyWish = new Wishes();
+        dummyWish.setWishID(wishID);
         dummyWish.setName("Dummy titel");
         dummyWish.setDescription("Dummy beskrivelse");
         dummyWish.setPrice(100);
 
-        //MAKES SURE THE SERVICE RETURNS THE DUMMY WISH
         when(wishListService.getWishByWishID(wishID)).thenReturn(dummyWish);
 
-        mockMvc.perform(get("/wishlist/editwish").param("id", String.valueOf(wishID)))
+        mockMvc.perform(get("/wishlist/editwish")
+                        .param("id", String.valueOf(wishID))
+                        .sessionAttr("userID", 42)) // simulerer login
                 .andExpect(status().isOk())
                 .andExpect(view().name("editwish"))
                 .andExpect(model().attributeExists("wish"))
-                .andExpect(model().attribute("wish", dummyWish));
+                .andExpect(model().attribute("wish", hasProperty("wishID", equalTo(wishID))))
+                .andExpect(model().attribute("wish", hasProperty("name", equalTo("Dummy titel"))))
+                .andExpect(model().attribute("wish", hasProperty("description", equalTo("Dummy beskrivelse"))))
+                .andExpect(model().attribute("wish", hasProperty("price", equalTo(100.0))));
     }
+
 
     @Test
     void updateWish_ShouldRedirectAndInvokeService() throws Exception {
