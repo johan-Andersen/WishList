@@ -110,7 +110,7 @@ public class WishListController {
         Integer userID = (Integer) session.getAttribute("userID");
 
         if(userID == null) {
-            return "redirect:/wishes/login";
+            return "redirect:/wishlist/login";
         }
 
         model.addAttribute("wishes", wishListService.getWishesByWishListID(wishlistID));
@@ -120,7 +120,13 @@ public class WishListController {
 
     // Displays the page to add a new wish to a wishlist (Read)
     @GetMapping("/addwish")
-    public String addwish(@RequestParam("id") int wishlistID, Model model) {
+    public String addwish(@RequestParam("id") int wishlistID, HttpSession session, Model model) {
+        Integer userID = (Integer) session.getAttribute("userID");
+
+        if(userID == null) {
+            return "redirect:/wishlist/login";
+        }
+
         Wishes wish = new Wishes();
         wish.setWishListID(wishlistID);
         model.addAttribute("wish", wish);
@@ -129,7 +135,12 @@ public class WishListController {
 
     // Adds a new wish to a wishlist and redirects to the wishlist page (Create)
     @PostMapping("/addwish")
-    public String addWish(@ModelAttribute Wishes wish) {
+    public String addWish(@ModelAttribute Wishes wish, HttpSession session) {
+        Integer userID = (Integer) session.getAttribute("userID");
+
+        if(userID == null) {
+            return "redirect:/wishlist/login";
+        }
         wishListService.addWish(wish);
         return "redirect:/wishlist/wishlistpage?id=" + wish.getWishListID();
     }
@@ -137,7 +148,13 @@ public class WishListController {
     // Deletes a wish from a wishlist and redirects to the profile page (Delete)
     // ------------------------------------- EDIT A WISH --------------------------------------------
     @GetMapping("/editwish")
-    public String getWishPage(@RequestParam("id") int wishID, Model model) {
+    public String getWishPage(@RequestParam("id") int wishID, HttpSession session, Model model) {
+        Integer userID = (Integer) session.getAttribute("userID");
+
+        if(userID == null) {
+            return "redirect:/wishlist/login";
+        }
+
         model.addAttribute("wish", wishListService.getWishByWishID(wishID));
         return "editwish";
     }

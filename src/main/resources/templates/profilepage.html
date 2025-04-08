@@ -49,7 +49,6 @@
                             <p class="card-text" th:text="${wishlist.name}"></p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
                                     <form th:action="@{/wishlist/delete/{wishListID}(wishListID=${wishlist.wishlistID})}" method="post">
                                         <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
                                     </form>
