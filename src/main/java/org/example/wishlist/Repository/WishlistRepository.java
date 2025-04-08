@@ -10,19 +10,15 @@ import java.util.List;
 
 @Repository
 public class WishlistRepository {
-    @Value("${DEV_DATABASE_URL}")
-    private String dbURL;
-    @Value("${DEV_USERNAME}")
-    private String username;
-    @Value("${DEV_PASSWORD}")
-    private String password;
 
-    private final JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
 
     // Constructor to initialize JdbcTemplate
     public WishlistRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
+    //public WishlistRepository(){
+    //}
 
     // CRUD Methods (Create, Read, Update, Delete)
 
