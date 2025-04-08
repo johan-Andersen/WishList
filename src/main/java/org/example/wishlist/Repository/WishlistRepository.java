@@ -77,7 +77,7 @@ public class WishlistRepository {
                 rs.getInt("wishListID"),
                 rs.getString("name"),
                 rs.getString("description"),
-                rs.getInt("price"),
+                rs.getDouble("price"),
                 rs.getString("link")));
     }
 
@@ -89,7 +89,7 @@ public class WishlistRepository {
                 rs.getInt("wishListID"),
                 rs.getString("name"),
                 rs.getString("description"),
-                rs.getInt("price"),
+                rs.getDouble("price"),
                 rs.getString("link")));
     }
     public Wishes getWishByWishID(int ID) {
@@ -99,7 +99,7 @@ public class WishlistRepository {
                 rs.getInt("wishListID"),
                 rs.getString("name"),
                 rs.getString("description"),
-                rs.getInt("price"),
+                rs.getDouble("price"),
                 rs.getString("link")));
     }
 

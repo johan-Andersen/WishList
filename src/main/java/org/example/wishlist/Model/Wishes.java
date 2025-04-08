@@ -5,10 +5,10 @@ public class Wishes {
     private int wishListID;
     private String name;
     private String description;
-    private int price;
+    private double price;
     private String link;
 
-    public Wishes(int wishID, int wishListID, String name, String description, int price, String link) {
+    public Wishes(int wishID, int wishListID, String name, String description, double price, String link) {
         this.wishID = wishID;
         this.wishListID = wishListID;
         this.name = name;
@@ -49,12 +49,12 @@ public class Wishes {
         this.description = description;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
     //Not implemented yet!!!
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
