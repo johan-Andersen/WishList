@@ -16,7 +16,6 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasProperty;
-import static org.hamcrest.core.Is.is;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -40,28 +39,23 @@ class WishListControllerTest {
 
     }
 
-    //NEGATIVE TESTING FOR NONEXISTENT PAGE: --------------------------------------------------------------------------
+    //NEGATIVE TESTING FOR NONEXISTENT PAGE:
     @Test
     void viewNonExistentPage() throws Exception {
         mockMvc.perform(get("/nonexistent"))
                 .andExpect(status().isNotFound());
     }
 
-    //TESTING FOR EXISTING PAGES: /INDEX:---------------------------------------------------------------------------------
+    //TESTING FOR EXISTING PAGES: /INDEX:
     @Test
     void viewFrontPageCorrect() throws Exception {
         mockMvc.perform(get("")).andExpect(status().isOk()).andExpect(view().name("index"));
     }
 
-    //TESTING FOR EXISTING PAGES: /WISHLIST/SIGNUP:----------------------------------------------------------------------------
+    //TESTING FOR EXISTING PAGES: /WISHLIST/SIGNUP:
     @Test
     void viewSignUpPage() throws Exception {
         mockMvc.perform(get("/wishlist/signup")).andExpect(status().isOk()).andExpect(view().name("signup"));
-    }
-
-    @Test
-    void addUser() {
-
     }
 
     @Test
@@ -70,23 +64,28 @@ class WishListControllerTest {
 
     }
 
-/*
-    @Test
-    void showProfilePageWithWishlists() throws Exception {
-        //TODO FIX SO METHOD FITS TO CONSTRUCTOR
-        List<WishLists> wishlists = Arrays.asList(new WishLists(1, "birhtday"), new WishLists(2, "")); //Instances of wishLists so we can run the test
-        when(wishListService.getAllWishLists()).thenReturn(wishlists); //Makes the method getAllWishLists return the mockup list and not the database
 
-        mockMvc.perform(get("/wishlist/profilepage"))
+    @Test
+    void showProfilePageWithSessionAndWishlists() throws Exception {
+        int userID = 12;
+        List<WishLists> wishlists = Arrays.asList(
+                new WishLists(1, userID, "Birthday"),
+                new WishLists(2, userID, "Christmas")
+        );
+
+        when(wishListService.getWishListsByUserID(userID)).thenReturn(wishlists);
+
+        mockMvc.perform(get("/wishlist/profilepage")
+                        .sessionAttr("userID", userID)) // ADDS USERID TO SESSION
                 .andExpect(status().isOk())
                 .andExpect(view().name("profilepage"))
                 .andExpect(model().attributeExists("wishlists"))
                 .andExpect(model().attribute("wishlists", wishlists));
 
-        verify(wishListService, times(1)).getAllWishLists();
+        verify(wishListService, times(1)).getWishListsByUserID(userID);
     }
-*/
-    //ADD WISHLIST: :-------------------------------------------------------------------------------------------------
+
+    //ADD WISHLIST:
     //METHOD FOR CONFIRMING IT IS THE RIGHT PAGE THAT SHOWS UP
     @Test
     void showAddWishListPage() throws Exception {
@@ -101,12 +100,12 @@ class WishListControllerTest {
         WishLists wishList = new WishLists();
         wishList.setName("Christmas");
 
-        mockMvc.perform(post("/wishlist/addwishlist") //Simulates a post request.
-                        .flashAttr("wishLists", wishList))// Simulates sending instance of wishlists to the controller.
-                .andExpect(status().is3xxRedirection()) // Makes sure that it is a redirect
-                .andExpect(redirectedUrl("/wishlist/profilepage")); // Redirects to this endpoint.
+        mockMvc.perform(post("/wishlist/addwishlist") // SIMULATES A POST REQUEST
+                        .flashAttr("wishLists", wishList))// SIMULATES SENDING INSTANCE OF WISHLISTS TO THE CONTROLLER
+                .andExpect(status().is3xxRedirection()) // MAKES SURE THAT IS A REDIRECT
+                .andExpect(redirectedUrl("/wishlist/profilepage")); //REDIRECTS TO THIS ENDPOINT
 
-        verify(wishListService, times(1)).addWishList(any(WishLists.class)); // Ensures that the method is only called once
+        verify(wishListService, times(1)).addWishList(any(WishLists.class)); //ENSURES THAT THE METHOD IS ONLY CALLED ONCE
     }
 
     @Test
@@ -138,25 +137,6 @@ class WishListControllerTest {
                 .andExpect(model().attribute("wish", hasProperty("wishListID", equalTo(wishlistID)))); // CHECKS THAT wish HAS THE CORRECT wishListID
     }
 
-    /*
-    @Test
-    void testPostUpdateWish() throws Exception {
-        int wishID = 1;
-        Wishes wish = new Wishes();
-        wish.setWishID(wishID);
-        wish.setName("NikeSko");
-
-        doNothing().when(wishListService).updateWish(wishID, wish);
-
-        mockMvc.perform(post("/update/{wishID}", wishID)
-                        .flashAttr("wish", wish))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/wishlist/profilepage"));
-
-        verify(wishListService, times(1)).updateWish(wishID, wish);
-    }
-*/
-
     @Test
     void getEditWishPage() throws Exception {
         int wishID = 1;
@@ -172,29 +152,50 @@ class WishListControllerTest {
                 .andExpect(model().attributeExists("wish"));
     }
 
-
-    /*
     @Test
-    void testPostUpdateWish() throws Exception {
-        int wishID = 1;
-        Wishes wish = new Wishes();
-        wish.setWishID(wishID);
-        wish.setName("NikeSko");
+    void getWishPage_ReturnsEditwishViewAndModel() throws Exception {
+        int wishID = 10;
+        Wishes dummyWish = new Wishes();
+        dummyWish.setName("Dummy titel");
+        dummyWish.setDescription("Dummy beskrivelse");
+        dummyWish.setPrice(100);
 
-        when(wishListService.getWishByWishID(wishID)).thenReturn(wish);
-        doNothing().when(wishListService).updateWish(wishID, wish);
+        //MAKES SURE THE SERVICE RETURNS THE DUMMY WISH
+        when(wishListService.getWishByWishID(wishID)).thenReturn(dummyWish);
 
-        mockMvc.perform(post("/wishlist/update/{wishID}", wishID))
+        mockMvc.perform(get("/wishlist/editwish").param("id", String.valueOf(wishID)))
+                .andExpect(status().isOk())
+                .andExpect(view().name("editwish"))
+                .andExpect(model().attributeExists("wish"))
+                .andExpect(model().attribute("wish", dummyWish));
+    }
+
+    @Test
+    void updateWish_ShouldRedirectAndInvokeService() throws Exception {
+        int wishID = 42;
+
+        mockMvc.perform(post("/wishlist/update/{wishID}", wishID)
+                        .param("name", "Ny guitar")
+                        .param("description", "Skal være rød og firkantet")
+                        .param("price", "2500"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/wishlist/profilepage"));
 
-        verify(wishListService, times(1)).updateWish(wishID, wish);
-
+        //VERIFIES THE SERVICE METHOD IS CALLED WITH ANY WISHES OBJECT
+        verify(wishListService, times(1)).updateWish(eq(wishID), any(Wishes.class));
     }
-*/
+
     @Test
-    void deleteWish() {
+    void deleteWish_ShouldRedirectAndInvokeService() throws Exception {
+        int wishID = 55;
 
+        mockMvc.perform(post("/wishlist/deleteWish/{wishID}", wishID))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/wishlist/profilepage"));
 
+        // CONFIRMS THAT THE DELETE METHOD IS CALLES WITH THE RIGHT ID
+        verify(wishListService, times(1)).deleteWishFromWishList(eq(wishID));
     }
+
+
 }
