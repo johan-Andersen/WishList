@@ -16,7 +16,6 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasProperty;
-import static org.hamcrest.core.Is.is;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -70,22 +69,27 @@ class WishListControllerTest {
 
     }
 
-/*
-    @Test
-    void showProfilePageWithWishlists() throws Exception {
-        //TODO FIX SO METHOD FITS TO CONSTRUCTOR
-        List<WishLists> wishlists = Arrays.asList(new WishLists(1, "birhtday"), new WishLists(2, "")); //Instances of wishLists so we can run the test
-        when(wishListService.getAllWishLists()).thenReturn(wishlists); //Makes the method getAllWishLists return the mockup list and not the database
 
-        mockMvc.perform(get("/wishlist/profilepage"))
+    @Test
+    void showProfilePageWithSessionAndWishlists() throws Exception {
+        int userID = 12;
+        List<WishLists> wishlists = Arrays.asList(
+                new WishLists(1, userID, "Birthday"),
+                new WishLists(2, userID, "Christmas")
+        );
+
+        when(wishListService.getWishListsByUserID(userID)).thenReturn(wishlists);
+
+        mockMvc.perform(get("/wishlist/profilepage")
+                        .sessionAttr("userID", userID)) // ADDS USERID TO SESSION
                 .andExpect(status().isOk())
                 .andExpect(view().name("profilepage"))
                 .andExpect(model().attributeExists("wishlists"))
                 .andExpect(model().attribute("wishlists", wishlists));
 
-        verify(wishListService, times(1)).getAllWishLists();
+        verify(wishListService, times(1)).getWishListsByUserID(userID);
     }
-*/
+
     //ADD WISHLIST: :-------------------------------------------------------------------------------------------------
     //METHOD FOR CONFIRMING IT IS THE RIGHT PAGE THAT SHOWS UP
     @Test
@@ -137,25 +141,6 @@ class WishListControllerTest {
                 .andExpect(model().attributeExists("wish")) //CHECKS THAT THE MODEL HAS THE ATTRIBUTE WISH
                 .andExpect(model().attribute("wish", hasProperty("wishListID", equalTo(wishlistID)))); // CHECKS THAT wish HAS THE CORRECT wishListID
     }
-
-    /*
-    @Test
-    void testPostUpdateWish() throws Exception {
-        int wishID = 1;
-        Wishes wish = new Wishes();
-        wish.setWishID(wishID);
-        wish.setName("NikeSko");
-
-        doNothing().when(wishListService).updateWish(wishID, wish);
-
-        mockMvc.perform(post("/update/{wishID}", wishID)
-                        .flashAttr("wish", wish))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/wishlist/profilepage"));
-
-        verify(wishListService, times(1)).updateWish(wishID, wish);
-    }
-*/
 
     @Test
     void getEditWishPage() throws Exception {
