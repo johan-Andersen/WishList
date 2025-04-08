@@ -23,10 +23,10 @@
       <label for="name">Name</label>
     </div>
 
-    <!-- Textarea for the wish description -->
+    <!-- Input field for the wish link -->
     <div class="form-floating mb-3">
-      <textarea class="form-control" id="description" name="description" th:field="*{description}" style="height: 100px;"></textarea>
-      <label for="description">Description</label>
+      <input type="text" class="form-control" id="link" name="link"  th:field="*{link}">
+      <label for="link">Link</label>
     </div>
 
     <!-- Input field for the wish price -->
@@ -35,10 +35,10 @@
       <label for="price">Price</label>
     </div>
 
-    <!-- Input field for the wish link -->
+    <!-- Textarea for the wish description -->
     <div class="form-floating mb-3">
-      <input type="text" class="form-control" id="link" name="link"  th:field="*{link}">
-      <label for="link">Link</label>
+      <textarea class="form-control" id="description" name="description" th:field="*{description}" style="height: 100px;"></textarea>
+      <label for="description">Description</label>
     </div>
 
     <!-- Submit button to save changes -->
