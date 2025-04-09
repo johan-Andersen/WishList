@@ -33,34 +33,34 @@ jobs:
           name: java-app
           path: '${{ github.workspace }}/target/*.jar'
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    environment:
-      name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    permissions:
-      id-token: write #This is required for requesting the JWT
-      contents: read #This is required for actions/checkout
-  
-    steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v4
-        with:
-          name: java-app
-      
-      - name: Login to Azure
-        uses: azure/login@v2
-        with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_82D5F13B6B634C6FB9B7BCD76BE0494D }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_87074D640FFB49C4A4CE272AD71D99A5 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_417530367B1B4A3F875833DE30B7CC37 }}
-
-      - name: Deploy to Azure Web App
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@v3
-        with:
-          app-name: 'wish-list'
-          slot-name: 'Production'
-          package: '*.jar'
-          
+#  deploy:
+#    runs-on: ubuntu-latest
+#    needs: build
+#    environment:
+#      name: 'Production'
+#      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+#    permissions:
+#      id-token: write #This is required for requesting the JWT
+#      contents: read #This is required for actions/checkout
+#
+#    steps:
+#      - name: Download artifact from build job
+#        uses: actions/download-artifact@v4
+#        with:
+#          name: java-app
+#
+#      - name: Login to Azure
+#        uses: azure/login@v2
+#        with:
+#          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_82D5F13B6B634C6FB9B7BCD76BE0494D }}
+#          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_87074D640FFB49C4A4CE272AD71D99A5 }}
+#          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_417530367B1B4A3F875833DE30B7CC37 }}
+#
+#      - name: Deploy to Azure Web App
+#        id: deploy-to-webapp
+#        uses: azure/webapps-deploy@v3
+#        with:
+#          app-name: 'wish-list'
+#          slot-name: 'Production'
+#          package: '*.jar'
+#
