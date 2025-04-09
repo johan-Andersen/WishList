@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @Sql(
         executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD,
-        scripts = {"classpath:h2init.sql"}
+        scripts = "classpath:h2init.sql"
 )
 
 public class WishListRepositoryTest {
